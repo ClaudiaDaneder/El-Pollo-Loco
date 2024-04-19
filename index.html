@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="img/9_intro_outro_screens/start/startscreen_1.png" />
+    <link rel="icon" type="image/x-icon" href="img/4_enemie_boss_chicken/3_attack/G13.png">
+    <title>El Pollo Loco</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="js/soundmanager.js"></script>
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/moveable-object.class.js"></script>
+    <script src="models/statusbar.class.js"></script>
+    <script src="models/statusbar-health.class.js"></script>
+    <script src="models/statusbar-coins.class.js"></script>
+    <script src="models/statusbar-bottles.class.js"></script>
+    <script src="models/statusbar-endboss.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/chicken.class.js"></script>
+    <script src="models/minichicken.class.js"></script>
+    <script src="models/throwable-objects.class.js"></script>
+    <script src="models/bottle.class.js"></script>
+    <script src="models/coin.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="models/clouds.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+</head>
+
+<body onload="showStartScreen()">
+
+    <div class="background-image"></div>
+    <div class="rotate-device">
+        <h1>Please rotate your device into landscape mode</h1>
+    </div>
+
+    <div id="content">
+        <div id="loading-screen" class="hide">
+            <h1>loading...</h1>
+            <div class="loading-circle"><img src="img/9_intro_outro_screens/start/loading.svg"></div>
+        </div>
+        <div class="overlay">
+            <div id="screen-controls" class="screen-controls">
+                <div class="screen-control-button" id="how-to-play-button" onclick="showOrHideHowToPlay()">?</div>
+                <div class="screen-control-button" id="start-screen-sound-button" onclick="toggleMute()"><img
+                        id="start-screen-sound" src="img/9_intro_outro_screens/start/sound.svg"></div>
+                <div class="screen-control-button" id="full-screen-button" onclick="toggleFullScreen()"><img
+                        id="full-screen-button-img" src="img/9_intro_outro_screens/start/fullscreen.svg"></div>
+            </div>
+            <div id="mobile-controls" class="mobile-controls">
+                <div class="panel">
+                    <div class="screen-control-button-container">
+                        <div class="screen-control-button" id="mobile-btn-left"><img
+                                src="img/9_intro_outro_screens/start/arrow-left_brown.png"></div>
+                    </div>
+                    <div class="screen-control-button-container">
+                        <div class="screen-control-button" id="mobile-btn-right"><img
+                                src="img/9_intro_outro_screens/start/arrow-right_brown.png"></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="screen-control-button-container">
+                        <div class="screen-control-button" id="mobile-btn-jump"><img
+                                src="img/9_intro_outro_screens/start/arrow-left_brown.png" style="rotate: 90deg;"></div>
+                    </div>
+                    <div class="screen-control-button-container">
+                        <div class="screen-control-button" id="mobile-btn-throw"><img
+                                src="img/6_salsa_bottle/salsa_bottle.png" style="width: 38px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="start-screen">
+            <button type="button" onclick="showLoadingScreen()" onmouseover="playClickSound()">Start Game</button>
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png">
+
+        </div>
+
+        <div id="game-over-screen" class="hide">
+            <button type="button" onclick="showLoadingScreen()" onmouseover="playClickSound()">Restart Game</button>
+            <button type="button" onmouseover="playClickSound()" onclick="showStartScreen()">Back To Menu</button>
+        </div>
+
+        <div id="how-to-play" class="hide">
+            <button type="button" class="close" title="Close Window" onclick="showOrHideHowToPlay()">
+                <p>x</p>
+            </button>
+            <h1>HOW TO PLAY</h1>
+            <div class="mobile-keys-container">
+                <div class="keyboard-line">
+                    <div class="key-and-explanation">
+                        <div class="screen-control-button"><img
+                                src="img/9_intro_outro_screens/start/arrow-left_brown.png"></div>
+                        <p>Walk left</p>
+                    </div>
+                    <div class="key-and-explanation">
+                        <p>Walk right</p>
+                        <div class="screen-control-button"><img
+                                src="img/9_intro_outro_screens/start/arrow-right_brown.png"></div>
+                    </div>
+                </div>
+                <div class="keyboard-line">
+                    <div class="key-and-explanation">
+                        <div class="screen-control-button" id="mobile-btn-jump"><img
+                                src="img/9_intro_outro_screens/start/arrow-left_brown.png" style="rotate: 90deg;"></div>
+                        <p>Jump</p>
+                    </div>
+                    <div class="key-and-explanation">
+                        <p>Throw Bottle</p>
+                        <div class="screen-control-button" id="mobile-btn-throw"><img
+                                src="img/6_salsa_bottle/salsa_bottle.png" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="keyboard-container">
+                <div class="keyboard-line" style="padding-left: 17px;">
+                    <div class="key-and-explanation">
+                        <p>Walk left</p>
+                        <div class="key">
+                            <div class="key-inner">
+                                <img src="img/9_intro_outro_screens/start/arrow-left.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="key-and-explanation">
+                        <div class="key">
+                            <div class="key-inner">
+                                <img src="img/9_intro_outro_screens/start/arrow-right.png">
+                            </div>
+                        </div>
+                        <p>Walk right</p>
+                    </div>
+                </div>
+
+                <div class="keyboard-line">
+                    <div class="explanation-under-key">
+                        <div class="key">
+                            <div class="key-inner">S</div>
+                        </div>
+                        <p>Throw Bottle</p>
+                    </div>
+                </div>
+                <div class="keyboard-line">
+                    <div class="explanation-under-key">
+                        <div class="space">
+                            <div class="space-inner">SPACE</div>
+                        </div>
+                        <p>Jump</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="game-screen" class="hide">
+            <canvas id="canvas" width="720" height="480"></canvas>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
